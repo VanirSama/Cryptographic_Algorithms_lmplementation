@@ -12,7 +12,7 @@ using namespace std;
 #define L64_MASK 0x00000000ffffffff
 #define H64_MASK 0xffffffff00000000
 
-inline vector<string> splitIntoBlocks(const string& s) { // разбиение строки на блоки по 8 символов
+inline vector<string> splitIntoBlocks(const string& s) { // Г°Г Г§ГЎГЁГҐГ­ГЁГҐ Г±ГІГ°Г®ГЄГЁ Г­Г  ГЎГ«Г®ГЄГЁ ГЇГ® 8 Г±ГЁГ¬ГўГ®Г«Г®Гў
     vector<string> res;
     for (int i = 0; i < s.length(); i += 8) {
         string sub = s.substr(i, 8);
@@ -21,11 +21,11 @@ inline vector<string> splitIntoBlocks(const string& s) { // разбиение строки на 
     return res;
 }
 
-inline uint64_t BlockToUint64(const string& b) { // конвертация бока в значение uint64_t
+inline uint64_t BlockToUint64(const string& b) { // ГЄГ®Г­ГўГҐГ°ГІГ Г¶ГЁГї ГЎГ®ГЄГ  Гў Г§Г­Г Г·ГҐГ­ГЁГҐ uint64_t
     string res = b;
     size_t len = res.size();
     if (len < 8) {
-        res.append(8 - len, '\0'); // добавляем нули для дополнения до 8 символов
+        res.append(8 - len, '\0'); // Г¤Г®ГЎГ ГўГ«ГїГҐГ¬ Г­ГіГ«ГЁ Г¤Г«Гї Г¤Г®ГЇГ®Г«Г­ГҐГ­ГЁГї Г¤Г® 8 Г±ГЁГ¬ГўГ®Г«Г®Гў
     }
     uint64_t r = 0;
     for (char c : res) {
@@ -34,7 +34,7 @@ inline uint64_t BlockToUint64(const string& b) { // конвертация бока в значение 
     return r;
 }
 
-inline vector<uint64_t> stringToUint64Array(const string& s) { // разбиение строки на массив значений uint64_t
+inline vector<uint64_t> stringToUint64Array(const string& s) { // Г°Г Г§ГЎГЁГҐГ­ГЁГҐ Г±ГІГ°Г®ГЄГЁ Г­Г  Г¬Г Г±Г±ГЁГў Г§Г­Г Г·ГҐГ­ГЁГ© uint64_t
     vector<uint64_t> result;
     vector<string> blocks = splitIntoBlocks(s);
     for (string b : blocks) {
@@ -44,7 +44,7 @@ inline vector<uint64_t> stringToUint64Array(const string& s) { // разбиение стро
     return result;
 }
 
-inline string uint64ToString(uint64_t num) { // обратный перевод значения uint64_t в строку
+inline string uint64ToString(uint64_t num) { // Г®ГЎГ°Г ГІГ­Г»Г© ГЇГҐГ°ГҐГўГ®Г¤ Г§Г­Г Г·ГҐГ­ГЁГї uint64_t Гў Г±ГІГ°Г®ГЄГі
     string res;
     string bin = bitset<64>(num).to_string();
     vector<string> temp_bin = splitIntoBlocks(bin);
@@ -61,7 +61,7 @@ inline string uint64ToString(uint64_t num) { // обратный перевод значения uint64
     return res;
 }
 
-inline string uint64ArrayToString(const vector<uint64_t>& vals) { // перевод массива uint64_t в строку
+inline string uint64ArrayToString(const vector<uint64_t>& vals) { // ГЇГҐГ°ГҐГўГ®Г¤ Г¬Г Г±Г±ГЁГўГ  uint64_t Гў Г±ГІГ°Г®ГЄГі
     string result;
     for (uint64_t value : vals) {
         string temp = uint64ToString(value);
@@ -70,7 +70,7 @@ inline string uint64ArrayToString(const vector<uint64_t>& vals) { // перевод мас
     return result;
 }
 
-inline static bool isPrime(uint64_t prime) { // Проверка простого числа для алгоритма RSA
+inline static bool isPrime(uint64_t prime) { // ГЏГ°Г®ГўГҐГ°ГЄГ  ГЇГ°Г®Г±ГІГ®ГЈГ® Г·ГЁГ±Г«Г  Г¤Г«Гї Г Г«ГЈГ®Г°ГЁГІГ¬Г  RSA
     uint64_t i, j;
     j = (uint64_t)sqrt((long double)prime);
     for (i = 2; i <= j; i++) {
@@ -81,7 +81,7 @@ inline static bool isPrime(uint64_t prime) { // Проверка простого числа для алго
     return true;
 }
 
-inline uint64_t generatePrime() { // Генерация простого числа
+inline uint64_t generatePrime() { // ГѓГҐГ­ГҐГ°Г Г¶ГЁГї ГЇГ°Г®Г±ГІГ®ГЈГ® Г·ГЁГ±Г«Г 
     uint64_t prime = (rand() % 1000000 + 10000);
     while (!isPrime(prime)){
         prime++;
@@ -89,7 +89,7 @@ inline uint64_t generatePrime() { // Генерация простого числа
     return prime;
 }
 
-inline uint256_t modExp(uint256_t base, uint256_t exp, uint256_t mod) { // озведение в степень с остатком по модулю
+inline uint256_t modExp(uint256_t base, uint256_t exp, uint256_t mod) { // Г®Г§ГўГҐГ¤ГҐГ­ГЁГҐ Гў Г±ГІГҐГЇГҐГ­Гј Г± Г®Г±ГІГ ГІГЄГ®Г¬ ГЇГ® Г¬Г®Г¤ГіГ«Гѕ
     uint256_t result = 1;
     base = base % mod;
     while (exp > 0) {
