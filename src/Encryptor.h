@@ -12,7 +12,7 @@ using namespace std;
 #define L64_MASK 0x00000000ffffffff
 #define H64_MASK 0xffffffff00000000
 
-inline vector<string> splitIntoBlocks(const string& s) { // ðàçáèåíèå ñòðîêè íà áëîêè ïî 8 ñèìâîëîâ
+inline vector<string> splitIntoBlocks(const string& s) { // разбиение строки на блоки по 8 символов
     vector<string> res;
     for (int i = 0; i < s.length(); i += 8) {
         string sub = s.substr(i, 8);
@@ -21,11 +21,11 @@ inline vector<string> splitIntoBlocks(const string& s) { // ðàçáèåíèå �
     return res;
 }
 
-inline uint64_t BlockToUint64(const string& b) { // êîíâåðòàöèÿ áîêà â çíà÷åíèå uint64_t
+inline uint64_t BlockToUint64(const string& b) { // конвертация бока в значение uint64_t
     string res = b;
     size_t len = res.size();
     if (len < 8) {
-        res.append(8 - len, '\0'); // äîáàâëÿåì íóëè äëÿ äîïîëíåíèÿ äî 8 ñèìâîëîâ
+        res.append(8 - len, '\0'); // добавляем нули для дополнения до 8 символов
     }
     uint64_t r = 0;
     for (char c : res) {
@@ -34,7 +34,7 @@ inline uint64_t BlockToUint64(const string& b) { // êîíâåðòàöèÿ áî�
     return r;
 }
 
-inline vector<uint64_t> stringToUint64Array(const string& s) { // ðàçáèåíèå ñòðîêè íà ìàññèâ çíà÷åíèé uint64_t
+inline vector<uint64_t> stringToUint64Array(const string& s) { // разбиение строки на массив значений uint64_t
     vector<uint64_t> result;
     vector<string> blocks = splitIntoBlocks(s);
     for (string b : blocks) {
@@ -44,7 +44,7 @@ inline vector<uint64_t> stringToUint64Array(const string& s) { // ðàçáèåí
     return result;
 }
 
-inline string uint64ToString(uint64_t num) { // îáðàòíûé ïåðåâîä çíà÷åíèÿ uint64_t â ñòðîêó
+inline string uint64ToString(uint64_t num) { // обратный перевод значения uint64_t в строку
     string res;
     string bin = bitset<64>(num).to_string();
     vector<string> temp_bin = splitIntoBlocks(bin);
@@ -61,7 +61,7 @@ inline string uint64ToString(uint64_t num) { // îáðàòíûé ïåðåâîä 
     return res;
 }
 
-inline string uint64ArrayToString(const vector<uint64_t>& vals) { // ïåðåâîä ìàññèâà uint64_t â ñòðîêó
+inline string uint64ArrayToString(const vector<uint64_t>& vals) { // перевод массива uint64_t в строку
     string result;
     for (uint64_t value : vals) {
         string temp = uint64ToString(value);
@@ -70,7 +70,7 @@ inline string uint64ArrayToString(const vector<uint64_t>& vals) { // ïåðåâ�
     return result;
 }
 
-inline static bool isPrime(uint64_t prime) { // Ïðîâåðêà ïðîñòîãî ÷èñëà äëÿ àëãîðèòìà RSA
+inline static bool isPrime(uint64_t prime) { // Проверка простого числа для алгоритма RSA
     uint64_t i, j;
     j = (uint64_t)sqrt((long double)prime);
     for (i = 2; i <= j; i++) {
@@ -81,7 +81,7 @@ inline static bool isPrime(uint64_t prime) { // Ïðîâåðêà ïðîñòîã�
     return true;
 }
 
-inline uint64_t generatePrime() { // Ãåíåðàöèÿ ïðîñòîãî ÷èñëà
+inline uint64_t generatePrime() { // Генерация простого числа
     uint64_t prime = (rand() % 1000000 + 10000);
     while (!isPrime(prime)){
         prime++;
@@ -89,7 +89,7 @@ inline uint64_t generatePrime() { // Ãåíåðàöèÿ ïðîñòîãî ÷èñ�
     return prime;
 }
 
-inline uint256_t modExp(uint256_t base, uint256_t exp, uint256_t mod) { // îçâåäåíèå â ñòåïåíü ñ îñòàòêîì ïî ìîäóëþ
+inline uint256_t modExp(uint256_t base, uint256_t exp, uint256_t mod) { // озведение в степень с остатком по модулю
     uint256_t result = 1;
     base = base % mod;
     while (exp > 0) {
