@@ -75,10 +75,10 @@ private:
 
             switch (option) {
             case '1':
-                des.demo('e'); // Âûçîâ àëãîðèòìà DES ñ ââåäåíèåì êëþ÷à
+                des.demo('e'); // Вызов алгоритма DES с введением ключа
                 break;
             case '2':
-                des.demo('g'); // Âûçîâ àëãîðèòìà DES ñî ñãåíåðèðîâàííûì êëþ÷îì
+                des.demo('g'); // Вызов алгоритма DES со сгенерированным ключом
                 break;
             case '3':
                 desrun = false;
@@ -107,10 +107,10 @@ private:
 
             switch (option) {
             case '1':
-                tdes.demo('e'); // Âûçîâ àëãîðèòìà Triple DES ñ ââåäåíèåì êëþ÷à
+                tdes.demo('e'); // Вызов алгоритма Triple DES с введением ключа
                 break;
             case '2':
-                tdes.demo('g'); // Âûçîâ àëãîðèòìà Triple DES ñî ñãåíåðèðîâàííûì êëþ÷îì
+                tdes.demo('g'); // Вызов алгоритма Triple DES со сгенерированным ключом
                 break;
             case '3':
                 tdesrun = false;
@@ -140,10 +140,10 @@ private:
 
             switch (option) {
             case '1':
-                rsa.demo('e'); // Âûçîâ àëãîðèòìà RSA ñ ââåäåíèåì ïðîñòûõ ÷èñåë
+                rsa.demo('e'); // Вызов алгоритма RSA с введением простых чисел
                 break;
             case '2':
-                rsa.demo('g'); // Âûçîâ àëãîðèòìà RSA ñî ñãåíåðèðîâàííûìè ïðîñòûìè ÷èñëàìè
+                rsa.demo('g'); // Вызов алгоритма RSA со сгенерированными простыми числами
                 break;
             case '3':
                 rsarun = false;
@@ -160,7 +160,7 @@ private:
 };
 
 int main() {
-    srand(static_cast<unsigned int>(time(nullptr))); // Èíèöèàëèçàöèÿ srand äëÿ ãåíåðàöèè ñëó÷àéíûõ ÷èñåë
+    srand(static_cast<unsigned int>(time(nullptr))); // Инициализация srand для генерации случайных чисел
     App app;
     app.run();
     system("pause");
