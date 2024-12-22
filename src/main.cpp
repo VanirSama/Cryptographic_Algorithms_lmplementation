@@ -75,10 +75,10 @@ private:
 
             switch (option) {
             case '1':
-                des.demo('e'); // Вызов алгоритма DES с введением ключа
+                des.demo('e'); // Г‚Г»Г§Г®Гў Г Г«ГЈГ®Г°ГЁГІГ¬Г  DES Г± ГўГўГҐГ¤ГҐГ­ГЁГҐГ¬ ГЄГ«ГѕГ·Г 
                 break;
             case '2':
-                des.demo('g'); // Вызов алгоритма DES со сгенерированным ключом
+                des.demo('g'); // Г‚Г»Г§Г®Гў Г Г«ГЈГ®Г°ГЁГІГ¬Г  DES Г±Г® Г±ГЈГҐГ­ГҐГ°ГЁГ°Г®ГўГ Г­Г­Г»Г¬ ГЄГ«ГѕГ·Г®Г¬
                 break;
             case '3':
                 desrun = false;
@@ -107,10 +107,10 @@ private:
 
             switch (option) {
             case '1':
-                tdes.demo('e'); // Вызов алгоритма Triple DES с введением ключа
+                tdes.demo('e'); // Г‚Г»Г§Г®Гў Г Г«ГЈГ®Г°ГЁГІГ¬Г  Triple DES Г± ГўГўГҐГ¤ГҐГ­ГЁГҐГ¬ ГЄГ«ГѕГ·Г 
                 break;
             case '2':
-                tdes.demo('g'); // Вызов алгоритма Triple DES со сгенерированным ключом
+                tdes.demo('g'); // Г‚Г»Г§Г®Гў Г Г«ГЈГ®Г°ГЁГІГ¬Г  Triple DES Г±Г® Г±ГЈГҐГ­ГҐГ°ГЁГ°Г®ГўГ Г­Г­Г»Г¬ ГЄГ«ГѕГ·Г®Г¬
                 break;
             case '3':
                 tdesrun = false;
@@ -140,10 +140,10 @@ private:
 
             switch (option) {
             case '1':
-                rsa.demo('e'); // Вызов алгоритма RSA с введением простых чисел
+                rsa.demo('e'); // Г‚Г»Г§Г®Гў Г Г«ГЈГ®Г°ГЁГІГ¬Г  RSA Г± ГўГўГҐГ¤ГҐГ­ГЁГҐГ¬ ГЇГ°Г®Г±ГІГ»Гµ Г·ГЁГ±ГҐГ«
                 break;
             case '2':
-                rsa.demo('g'); // Вызов алгоритма RSA со сгенерированными простыми числами
+                rsa.demo('g'); // Г‚Г»Г§Г®Гў Г Г«ГЈГ®Г°ГЁГІГ¬Г  RSA Г±Г® Г±ГЈГҐГ­ГҐГ°ГЁГ°Г®ГўГ Г­Г­Г»Г¬ГЁ ГЇГ°Г®Г±ГІГ»Г¬ГЁ Г·ГЁГ±Г«Г Г¬ГЁ
                 break;
             case '3':
                 rsarun = false;
@@ -160,7 +160,7 @@ private:
 };
 
 int main() {
-    srand(static_cast<unsigned int>(time(nullptr))); // Инициализация srand для генерации случайных чисел
+    srand(static_cast<unsigned int>(time(nullptr))); // Г€Г­ГЁГ¶ГЁГ Г«ГЁГ§Г Г¶ГЁГї srand Г¤Г«Гї ГЈГҐГ­ГҐГ°Г Г¶ГЁГЁ Г±Г«ГіГ·Г Г©Г­Г»Гµ Г·ГЁГ±ГҐГ«
     App app;
     app.run();
     system("pause");
