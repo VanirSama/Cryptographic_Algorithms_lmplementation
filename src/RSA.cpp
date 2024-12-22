@@ -12,7 +12,7 @@ class RSA : public Encryptor {
 private:
     vector<uint256_t> privateKeyPair = { 0, 0 };
 
-    uint256_t calculateE(uint256_t phi) { // Выбирается целое число e ( 1 < e < phi ) взаимно простое со значением функции Эйлера (phi)
+    uint256_t calculateE(uint256_t phi) { // Г‚Г»ГЎГЁГ°Г ГҐГІГ±Гї Г¶ГҐГ«Г®ГҐ Г·ГЁГ±Г«Г® e ( 1 < e < phi ) ГўГ§Г ГЁГ¬Г­Г® ГЇГ°Г®Г±ГІГ®ГҐ Г±Г® Г§Г­Г Г·ГҐГ­ГЁГҐГ¬ ГґГіГ­ГЄГ¶ГЁГЁ ГќГ©Г«ГҐГ°Г  (phi)
         uint256_t e;
         for (e = 2; e < phi; e++) {
             if (greatestCommonDivisor(e, phi) == 1) {
@@ -22,7 +22,7 @@ private:
         return -1;
     }
 
-    uint256_t greatestCommonDivisor(uint256_t e, uint256_t phi) { // поиск НОД
+    uint256_t greatestCommonDivisor(uint256_t e, uint256_t phi) { // ГЇГ®ГЁГ±ГЄ ГЌГЋГ„
         while (e > 0) {
             uint256_t temp = e;
             e = phi % e;
@@ -31,7 +31,7 @@ private:
         return phi;
     }
 
-    uint256_t calculateD(uint256_t e, uint256_t t) { // Вычисляется число d, мультипликативно обратное к числу e по модулю ф(n)
+    uint256_t calculateD(uint256_t e, uint256_t t) { // Г‚Г»Г·ГЁГ±Г«ГїГҐГІГ±Гї Г·ГЁГ±Г«Г® d, Г¬ГіГ«ГјГІГЁГЇГ«ГЁГЄГ ГІГЁГўГ­Г® Г®ГЎГ°Г ГІГ­Г®ГҐ ГЄ Г·ГЁГ±Г«Гі e ГЇГ® Г¬Г®Г¤ГіГ«Гѕ Гґ(n)
         uint256_t d, k = 1;
         while (true)
         {
@@ -47,11 +47,11 @@ public:
     RSA() {};
     ~RSA() {};
 
-    void nullifyPrivateKey() { // обнуление пары закрытого ключа
+    void nullifyPrivateKey() { // Г®ГЎГ­ГіГ«ГҐГ­ГЁГҐ ГЇГ Г°Г» Г§Г ГЄГ°Г»ГІГ®ГЈГ® ГЄГ«ГѕГ·Г 
         privateKeyPair = { 0, 0 };
     }
 
-    vector<uint256_t> generateKeyPairs(uint256_t p, uint256_t q) { // создание пары публичного ключа {e, n} и пары закрытого ключа {d, n}
+    vector<uint256_t> generateKeyPairs(uint256_t p, uint256_t q) { // Г±Г®Г§Г¤Г Г­ГЁГҐ ГЇГ Г°Г» ГЇГіГЎГ«ГЁГ·Г­Г®ГЈГ® ГЄГ«ГѕГ·Г  {e, n} ГЁ ГЇГ Г°Г» Г§Г ГЄГ°Г»ГІГ®ГЈГ® ГЄГ«ГѕГ·Г  {d, n}
         uint256_t n = p * q, phi = (p - 1) * (q - 1);
         uint256_t e = calculateE(phi), d = calculateD(e, phi);
         vector<uint256_t> publicKeyPair = { e, n };
@@ -95,7 +95,7 @@ public:
         }
     }
 
-    void demo(char mode) { // Демонстрация работы алгоритма
+    void demo(char mode) { // Г„ГҐГ¬Г®Г­Г±ГІГ°Г Г¶ГЁГї Г°Г ГЎГ®ГІГ» Г Г«ГЈГ®Г°ГЁГІГ¬Г 
         nullifyPrivateKey();
         bool flag;
         uint64_t p, q;
