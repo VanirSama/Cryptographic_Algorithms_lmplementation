@@ -31,7 +31,7 @@ public:
 
     uint256_t& operator=(const uint256_t& other) = default;
 
-    uint256_t operator+(const uint256_t& other) const { // Оператор сложения
+    uint256_t operator+(const uint256_t& other) const { // ГЋГЇГҐГ°Г ГІГ®Г° Г±Г«Г®Г¦ГҐГ­ГЁГї
         uint256_t result;
         uint64_t carry = 0;
         for (size_t i = 0; i < 8; ++i) {
@@ -42,12 +42,12 @@ public:
         return result;
     }
 
-    uint256_t& operator++() { // Префиксный оператор ++
+    uint256_t& operator++() { // ГЏГ°ГҐГґГЁГЄГ±Г­Г»Г© Г®ГЇГҐГ°Г ГІГ®Г° ++
         *this = *this + uint256_t(1);
         return *this;
     }
 
-    uint256_t operator++(int) { // Постфиксный оператор ++
+    uint256_t operator++(int) { // ГЏГ®Г±ГІГґГЁГЄГ±Г­Г»Г© Г®ГЇГҐГ°Г ГІГ®Г° ++
         uint256_t temp = *this;
         ++(*this);
         return temp;
@@ -70,18 +70,18 @@ public:
         return result;
     }
 
-    uint256_t& operator--() { // Префиксный оператор --
+    uint256_t& operator--() { // ГЏГ°ГҐГґГЁГЄГ±Г­Г»Г© Г®ГЇГҐГ°Г ГІГ®Г° --
         *this = *this - uint256_t(1);
         return *this;
     }
 
-    uint256_t operator--(int) { // Постфиксный оператор --
+    uint256_t operator--(int) { // ГЏГ®Г±ГІГґГЁГЄГ±Г­Г»Г© Г®ГЇГҐГ°Г ГІГ®Г° --
         uint256_t temp = *this;
         --(*this);
         return temp;
     }
 
-    uint256_t operator*(const uint256_t& other) const { // Оператор умножения
+    uint256_t operator*(const uint256_t& other) const { // ГЋГЇГҐГ°Г ГІГ®Г° ГіГ¬Г­Г®Г¦ГҐГ­ГЁГї
         uint256_t result;
         for (size_t i = 0; i < 8; ++i) {
             uint64_t carry = 0;
@@ -96,7 +96,7 @@ public:
         return result;
     }
 
-    uint256_t operator/(const uint256_t& other) const { // Оператор деления
+    uint256_t operator/(const uint256_t& other) const { // ГЋГЇГҐГ°Г ГІГ®Г° Г¤ГҐГ«ГҐГ­ГЁГї
         if (other.is_zero()) {
             throw std::overflow_error("Division by zero");
         }
@@ -117,7 +117,7 @@ public:
         return result;
     }
 
-    uint256_t operator%(const uint256_t& other) const { // оператор остатка по модулю
+    uint256_t operator%(const uint256_t& other) const { // Г®ГЇГҐГ°Г ГІГ®Г° Г®Г±ГІГ ГІГЄГ  ГЇГ® Г¬Г®Г¤ГіГ«Гѕ
         if (other == uint256_t(0)) {
             throw std::overflow_error("Modulo by zero");
         }
@@ -141,7 +141,7 @@ public:
         return all_of(values.begin(), values.end(), [](uint32_t v) { return v == 0; });
     }
 
-    // Операторы сравнения
+    // ГЋГЇГҐГ°Г ГІГ®Г°Г» Г±Г°Г ГўГ­ГҐГ­ГЁГї
     bool operator==(const uint256_t& other) const {
         return values == other.values;
     }
@@ -171,7 +171,7 @@ public:
         return !(*this < other);
     }
 
-    uint256_t operator&(const uint256_t& other) const { // Оператор побитового "И"
+    uint256_t operator&(const uint256_t& other) const { // ГЋГЇГҐГ°Г ГІГ®Г° ГЇГ®ГЎГЁГІГ®ГўГ®ГЈГ® "Г€"
         uint256_t result;
         for (size_t i = 0; i < 8; ++i) {
             result.values[i] = values[i] & other.values[i];
@@ -179,7 +179,7 @@ public:
         return result;
     }
 
-    uint256_t operator|(const uint256_t& other) const { // Оператор побитового "ИЛИ"
+    uint256_t operator|(const uint256_t& other) const { // ГЋГЇГҐГ°Г ГІГ®Г° ГЇГ®ГЎГЁГІГ®ГўГ®ГЈГ® "Г€Г‹Г€"
         uint256_t result;
         for (size_t i = 0; i < 8; ++i) {
             result.values[i] = values[i] | other.values[i];
@@ -187,7 +187,7 @@ public:
         return result;
     }
 
-    uint256_t operator<<=(size_t shift) const { // оператор побитового смещения влево
+    uint256_t operator<<=(size_t shift) const { // Г®ГЇГҐГ°Г ГІГ®Г° ГЇГ®ГЎГЁГІГ®ГўГ®ГЈГ® Г±Г¬ГҐГ№ГҐГ­ГЁГї ГўГ«ГҐГўГ®
         uint256_t result;
         size_t block_shift = shift / 32;
         size_t bit_shift = shift % 32;
@@ -203,7 +203,7 @@ public:
         return result;
     }
 
-    uint256_t operator>>=(size_t shift) const { // Оператор  побитового смещения вправо
+    uint256_t operator>>=(size_t shift) const { // ГЋГЇГҐГ°Г ГІГ®Г°  ГЇГ®ГЎГЁГІГ®ГўГ®ГЈГ® Г±Г¬ГҐГ№ГҐГ­ГЁГї ГўГЇГ°Г ГўГ®
         uint256_t result;
         size_t block_shift = shift / 32;
         size_t bit_shift = shift % 32;
@@ -219,7 +219,7 @@ public:
         return result;
     }
 
-    friend ostream& operator<<(ostream& os, const uint256_t& value) { // оператор вывода
+    friend ostream& operator<<(ostream& os, const uint256_t& value) { // Г®ГЇГҐГ°Г ГІГ®Г° ГўГ»ГўГ®Г¤Г 
         os << "0x";
         for (int i = 7; i >= 0; --i) {
             os << hex << setw(8) << setfill('0') << value.values[i];
