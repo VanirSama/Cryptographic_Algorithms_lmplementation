@@ -12,7 +12,7 @@ class RSA : public Encryptor {
 private:
     vector<uint256_t> privateKeyPair = { 0, 0 };
 
-    uint256_t calculateE(uint256_t phi) { // Âûáèðàåòñÿ öåëîå ÷èñëî e ( 1 < e < phi ) âçàèìíî ïðîñòîå ñî çíà÷åíèåì ôóíêöèè Ýéëåðà (phi)
+    uint256_t calculateE(uint256_t phi) { // Выбирается целое число e ( 1 < e < phi ) взаимно простое со значением функции Эйлера (phi)
         uint256_t e;
         for (e = 2; e < phi; e++) {
             if (greatestCommonDivisor(e, phi) == 1) {
@@ -22,7 +22,7 @@ private:
         return -1;
     }
 
-    uint256_t greatestCommonDivisor(uint256_t e, uint256_t phi) { // ïîèñê ÍÎÄ
+    uint256_t greatestCommonDivisor(uint256_t e, uint256_t phi) { // поиск НОД
         while (e > 0) {
             uint256_t temp = e;
             e = phi % e;
@@ -31,7 +31,7 @@ private:
         return phi;
     }
 
-    uint256_t calculateD(uint256_t e, uint256_t t) { // Âû÷èñëÿåòñÿ ÷èñëî d, ìóëüòèïëèêàòèâíî îáðàòíîå ê ÷èñëó e ïî ìîäóëþ ô(n)
+    uint256_t calculateD(uint256_t e, uint256_t t) { // Вычисляется число d, мультипликативно обратное к числу e по модулю ф(n)
         uint256_t d, k = 1;
         while (true)
         {
@@ -47,11 +47,11 @@ public:
     RSA() {};
     ~RSA() {};
 
-    void nullifyPrivateKey() { // îáíóëåíèå ïàðû çàêðûòîãî êëþ÷à
+    void nullifyPrivateKey() { // обнуление пары закрытого ключа
         privateKeyPair = { 0, 0 };
     }
 
-    vector<uint256_t> generateKeyPairs(uint256_t p, uint256_t q) { // ñîçäàíèå ïàðû ïóáëè÷íîãî êëþ÷à {e, n} è ïàðû çàêðûòîãî êëþ÷à {d, n}
+    vector<uint256_t> generateKeyPairs(uint256_t p, uint256_t q) { // создание пары публичного ключа {e, n} и пары закрытого ключа {d, n}
         uint256_t n = p * q, phi = (p - 1) * (q - 1);
         uint256_t e = calculateE(phi), d = calculateD(e, phi);
         vector<uint256_t> publicKeyPair = { e, n };
@@ -95,7 +95,7 @@ public:
         }
     }
 
-    void demo(char mode) { // Äåìîíñòðàöèÿ ðàáîòû àëãîðèòìà
+    void demo(char mode) { // Демонстрация работы алгоритма
         nullifyPrivateKey();
         bool flag;
         uint64_t p, q;
