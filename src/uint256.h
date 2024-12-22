@@ -31,7 +31,7 @@ public:
 
     uint256_t& operator=(const uint256_t& other) = default;
 
-    uint256_t operator+(const uint256_t& other) const { // Îïåðàòîð ñëîæåíèÿ
+    uint256_t operator+(const uint256_t& other) const { // Оператор сложения
         uint256_t result;
         uint64_t carry = 0;
         for (size_t i = 0; i < 8; ++i) {
@@ -42,12 +42,12 @@ public:
         return result;
     }
 
-    uint256_t& operator++() { // Ïðåôèêñíûé îïåðàòîð ++
+    uint256_t& operator++() { // Префиксный оператор ++
         *this = *this + uint256_t(1);
         return *this;
     }
 
-    uint256_t operator++(int) { // Ïîñòôèêñíûé îïåðàòîð ++
+    uint256_t operator++(int) { // Постфиксный оператор ++
         uint256_t temp = *this;
         ++(*this);
         return temp;
@@ -70,18 +70,18 @@ public:
         return result;
     }
 
-    uint256_t& operator--() { // Ïðåôèêñíûé îïåðàòîð --
+    uint256_t& operator--() { // Префиксный оператор --
         *this = *this - uint256_t(1);
         return *this;
     }
 
-    uint256_t operator--(int) { // Ïîñòôèêñíûé îïåðàòîð --
+    uint256_t operator--(int) { // Постфиксный оператор --
         uint256_t temp = *this;
         --(*this);
         return temp;
     }
 
-    uint256_t operator*(const uint256_t& other) const { // Îïåðàòîð óìíîæåíèÿ
+    uint256_t operator*(const uint256_t& other) const { // Оператор умножения
         uint256_t result;
         for (size_t i = 0; i < 8; ++i) {
             uint64_t carry = 0;
@@ -96,7 +96,7 @@ public:
         return result;
     }
 
-    uint256_t operator/(const uint256_t& other) const { // Îïåðàòîð äåëåíèÿ
+    uint256_t operator/(const uint256_t& other) const { // Оператор деления
         if (other.is_zero()) {
             throw std::overflow_error("Division by zero");
         }
@@ -117,7 +117,7 @@ public:
         return result;
     }
 
-    uint256_t operator%(const uint256_t& other) const { // îïåðàòîð îñòàòêà ïî ìîäóëþ
+    uint256_t operator%(const uint256_t& other) const { // оператор остатка по модулю
         if (other == uint256_t(0)) {
             throw std::overflow_error("Modulo by zero");
         }
@@ -141,7 +141,7 @@ public:
         return all_of(values.begin(), values.end(), [](uint32_t v) { return v == 0; });
     }
 
-    // Îïåðàòîðû ñðàâíåíèÿ
+    // Операторы сравнения
     bool operator==(const uint256_t& other) const {
         return values == other.values;
     }
@@ -171,7 +171,7 @@ public:
         return !(*this < other);
     }
 
-    uint256_t operator&(const uint256_t& other) const { // Îïåðàòîð ïîáèòîâîãî "È"
+    uint256_t operator&(const uint256_t& other) const { // Оператор побитового "И"
         uint256_t result;
         for (size_t i = 0; i < 8; ++i) {
             result.values[i] = values[i] & other.values[i];
@@ -179,7 +179,7 @@ public:
         return result;
     }
 
-    uint256_t operator|(const uint256_t& other) const { // Îïåðàòîð ïîáèòîâîãî "ÈËÈ"
+    uint256_t operator|(const uint256_t& other) const { // Оператор побитового "ИЛИ"
         uint256_t result;
         for (size_t i = 0; i < 8; ++i) {
             result.values[i] = values[i] | other.values[i];
@@ -187,7 +187,7 @@ public:
         return result;
     }
 
-    uint256_t operator<<=(size_t shift) const { // îïåðàòîð ïîáèòîâîãî ñìåùåíèÿ âëåâî
+    uint256_t operator<<=(size_t shift) const { // оператор побитового смещения влево
         uint256_t result;
         size_t block_shift = shift / 32;
         size_t bit_shift = shift % 32;
@@ -203,7 +203,7 @@ public:
         return result;
     }
 
-    uint256_t operator>>=(size_t shift) const { // Îïåðàòîð  ïîáèòîâîãî ñìåùåíèÿ âïðàâî
+    uint256_t operator>>=(size_t shift) const { // Оператор  побитового смещения вправо
         uint256_t result;
         size_t block_shift = shift / 32;
         size_t bit_shift = shift % 32;
@@ -219,7 +219,7 @@ public:
         return result;
     }
 
-    friend ostream& operator<<(ostream& os, const uint256_t& value) { // îïåðàòîð âûâîäà
+    friend ostream& operator<<(ostream& os, const uint256_t& value) { // оператор вывода
         os << "0x";
         for (int i = 7; i >= 0; --i) {
             os << hex << setw(8) << setfill('0') << value.values[i];
