@@ -10,7 +10,7 @@ using namespace std;
 
 class DES : public Encryptor {
 protected:
-    const vector<char> InitialPermutation = { // ìàòðèöà íà÷àëüíîé ïåðåñòàíîâêà áëîêà 64 áèò
+    const vector<char> InitialPermutation = { // матрица начальной перестановка блока 64 бит
     58, 50, 42, 34, 26, 18, 10, 2,
     60, 52, 44, 36, 28, 20, 12, 4,
     62, 54, 46, 38, 30, 22, 14, 6,
@@ -21,7 +21,7 @@ protected:
     63, 55, 47, 39, 31, 23, 15, 7
     };
 
-    const vector<char> ReversePermutation = { // ìàòðèöà îáðàòíîé ïåðåñòàíîâêè áèòîâ
+    const vector<char> ReversePermutation = { // матрица обратной перестановки битов
         40, 8, 48, 16, 56, 24, 64, 32,
         39, 7, 47, 15, 55, 23, 63, 31,
         38, 6, 46, 14, 54, 22, 62, 30,
@@ -32,7 +32,7 @@ protected:
         33, 1, 41, 9, 49, 17, 57, 25
     };
 
-    const vector<char> ExpansionTable = { // ìàòðèöà ðàñøèðåíèÿ ïîäáëîêà ñ 32 áèò äî 48 áèò
+    const vector<char> ExpansionTable = { // матрица расширения подблока с 32 бит до 48 бит
        32, 1, 2, 3, 4, 5,
        4, 5, 6, 7, 8, 9,
        8, 9, 10, 11, 12, 13,
@@ -43,7 +43,7 @@ protected:
        28, 29, 30, 31, 32, 1
     };
 
-    const vector<char> Permutation = { // ìàòðèöà ïåðåñòàíîâêè ðàóíäà
+    const vector<char> Permutation = { // матрица перестановки раунда
         16, 7, 20, 21,
         29, 12, 28, 17,
         1, 15, 23, 26,
@@ -54,7 +54,7 @@ protected:
         22, 11, 4, 25
     };
 
-    const vector<vector<char>> STables = { // S-òàáëèöû ïðåîáðàçîâàíèÿ
+    const vector<vector<char>> STables = { // S-таблицы преобразования
         {
             // S1
             14, 4, 13, 1, 2, 15, 11, 8, 3, 10, 6, 12, 5, 9, 0, 7,
@@ -113,7 +113,7 @@ protected:
         }
     };
     
-    const vector<char> PK1 = { // ìàòðèöà ïåðåñòàíîâêè îñíîâíîãî êëþ÷à äëÿ ãåíåðèðîâàíèÿ êëþ÷åé
+    const vector<char> PK1 = { // матрица перестановки основного ключа для генерирования ключей
         57, 49, 41, 33, 25, 17, 9,
         1, 58, 50, 42, 34, 26, 18,
         10, 2, 59, 51, 43, 35, 27,
@@ -124,7 +124,7 @@ protected:
         21, 13, 5, 28, 20, 12, 4
     };
 
-    const vector<char> PK2 = { // Âåêòîð ñãåíåðèðîâàííîãî êëþ÷à
+    const vector<char> PK2 = { // Вектор сгенерированного ключа
         14, 17, 11, 24, 1, 5,
         3, 28, 15, 6, 21, 10,
         23, 19, 12, 4, 26, 8,
@@ -135,7 +135,7 @@ protected:
         46, 42, 50, 36, 29, 32
     };
 
-    const vector<char> IterationShift = { // ëåâûå öèêëè÷åñêèå ñäâèãè êëþ÷à
+    const vector<char> IterationShift = { // левые циклические сдвиги ключа
         1, 1, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 1
     };
 
@@ -147,11 +147,11 @@ protected:
         return algorithm(input, key, 'd');
     }
 
-    string generateKey(int length) { // Ãåíåðàöèÿ êëþ÷à
+    string generateKey(int length) { // Генерация ключа
         string key;
-        for (int i = 0; i < length; i++) { // ãåíåðàöèÿ êëþ÷à äëèíîé length ñèìâîëîâ
+        for (int i = 0; i < length; i++) { // генерация ключа длиной length символов
             int rd_n = (rand() % 256);
-            if ((rd_n > 31) && (rd_n != 92) && (rd_n != 127)) { // èñêëþ÷åíèå âîçìîæíîñòè äîáàâëåíèÿ ñëóæåáíûõ ñèìâîëîâ è ñèìâîëà '\'
+            if ((rd_n > 31) && (rd_n != 92) && (rd_n != 127)) { // исключение возможности добавления служебных символов и символа '\'
                 char c = char(rd_n);
                 key.append(1, char(rd_n));
             }
@@ -173,7 +173,7 @@ public:
         return result;
     };
 
-    void demo(char mode) { // Äåìîíñòðàöèÿ ðàáîòû àëãîðèòìà
+    void demo(char mode) { // Демонстрация работы алгоритма
         string DESresult;
         string DESinput;
         cout << "\nEncryption DES\n-------------------------------------------\n";
@@ -220,7 +220,7 @@ public:
     }
 
 private:
-    string algorithm(string input, string key, char mode) { // îñíîâíîé àëãîðèòì
+    string algorithm(string input, string key, char mode) { // основной алгоритм
         vector<uint64_t> res;
         vector<uint64_t> blocks = stringToUint64Array(input);
         uint64_t k = BlockToUint64(key);
@@ -236,23 +236,23 @@ private:
             uint64_t permuted_choice_1 = 0, permuted_choice_2 = 0;
             uint64_t init_perm_res = 0, inv_init_perm_res = 0, pre_output = 0;
 
-            // Èçíà÷àëüíàÿ ïåðåñòàíîâêà
+            // Изначальная перестановка
             for (i = 0; i < 64; i++) {
                 init_perm_res <<= 1;
                 init_perm_res |= (b >> (64 - InitialPermutation[i])) & LB64;
             }
 
-            // Ïåðåñòàíîâêà ïðàâîé è ëåâîé ïîëîâèíû áëîêîâ
+            // Перестановка правой и левой половины блоков
             L = (uint32_t)(init_perm_res >> 32) & L64_MASK;
             R = (uint32_t)init_perm_res & L64_MASK;
 
-            // Ïåðåñòàíîâêà êëþ÷à
+            // Перестановка ключа
             for (i = 0; i < 56; i++) {
                 permuted_choice_1 <<= 1;
                 permuted_choice_1 |= (k >> (64 - PK1[i])) & LB64;
             }
 
-            // Ãåíåðèðîâàíèå êëþ÷åé è ñîçäàíèå áëîêîâ C è D
+            // Генерирование ключей и создание блоков C и D
             C = (uint32_t)((permuted_choice_1 >> 28) & 0x0fffffff);
             D = (uint32_t)(permuted_choice_1 & 0x0fffffff);
 
@@ -270,7 +270,7 @@ private:
                 }
             }
 
-            //Ôóíêöèÿ Ôåéñòåëÿ
+            //Функция Фейстеля
             for (i = 0; i < 16; i++) {
                 s_input = 0;
 
@@ -297,22 +297,22 @@ private:
                 }
 
                 f_function_res = 0;
-                // ïåðåñòàíîâêà
+                // перестановка
                 for (j = 0; j < 32; j++) { 
                     f_function_res <<= 1;
                     f_function_res |= (s_output >> (32 - Permutation[j])) & LB32;
                 }
 
-                // ïåðåñòàíîâêà Ôåéñòåëÿ
+                // перестановка Фейстеля
                 temp = R;
                 R = L ^ f_function_res;
                 L = temp;
             }
 
-            // êîìáèíàöèÿ L è R áëîêîâ
+            // комбинация L и R блоков
             pre_output = (((uint64_t)R) << 32) | (uint64_t)L;
 
-            for (i = 0; i < 64; i++) { // îáðàòíàÿ ïåðåñòàíîâêà
+            for (i = 0; i < 64; i++) { // обратная перестановка
                 inv_init_perm_res <<= 1;
                 inv_init_perm_res |= (pre_output >> (64 - ReversePermutation[i])) & LB64;
             }
@@ -323,7 +323,7 @@ private:
     }
 };
 
-// íàñëåäîâàíèå êëàññà DES êëàññîì TripleDES
+// наследование класса DES классом TripleDES
 class TripleDES : public DES {
 public:
     TripleDES() {};
@@ -331,19 +331,19 @@ public:
 
     string encrypt(string input, string key) {
 
-        // ðàçáèòèå êëþ÷à íà òðè 64-áèòíûõ áëîêà
+        // разбитие ключа на три 64-битных блока
         vector<uint64_t> keys = stringToUint64Array(key);
 
         uint64_t key1 = keys[0];
         uint64_t key2 = keys[1];
         uint64_t key3 = keys[2];
 
-        // ïðåîáðàçîâàíèå uint64_t îáðàòíî â ñòðîêó äëÿ èñïîëüçîâàíèÿ â DES
+        // преобразование uint64_t обратно в строку для использования в DES
         string key1_str = uint64ToString(key1);
         string key2_str = uint64ToString(key2);
         string key3_str = uint64ToString(key3);
 
-        // ïîñëåäîâàòåëüíîå øèôðîâàíèå
+        // последовательное шифрование
         string result = DES::enc(input, key1_str);
         result = DES::dec(result, key2_str);
         result = DES::enc(result, key3_str);
@@ -352,26 +352,26 @@ public:
 
     string decrypt(string input, string key) {
 
-        // ðàçáèòèå êëþ÷à íà òðè 64-áèòíûõ áëîêà
+        // разбитие ключа на три 64-битных блока
         vector<uint64_t> keys = stringToUint64Array(key);
 
         uint64_t key1 = keys[0];
         uint64_t key2 = keys[1];
         uint64_t key3 = keys[2];
 
-        // ïðåîáðàçîâàíèå uint64_t îáðàòíî â ñòðîêó äëÿ èñïîëüçîâàíèÿ â DES
+        // преобразование uint64_t обратно в строку для использования в DES
         string key1_str = uint64ToString(key1);
         string key2_str = uint64ToString(key2);
         string key3_str = uint64ToString(key3);
 
-        // ïîñëåäîâàòåëüíîå äåøèôðîâàíèå
+        // последовательное дешифрование
         string result = DES::dec(input, key3_str);
         result = DES::enc(result, key2_str);
         result = DES::dec(result, key1_str);
         return result;
     }
 
-    void demo(char mode) { // Äåìîíñòðàöèÿ ðàáîòû àëãîðèòìà
+    void demo(char mode) { // Демонстрация работы алгоритма
         string TDESresult;
         string TDESinput;
         cout << "\nEncryption 3-DES\n-------------------------------------------\n";
